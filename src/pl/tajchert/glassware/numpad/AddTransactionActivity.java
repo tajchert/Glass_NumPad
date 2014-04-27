@@ -92,17 +92,10 @@ public class AddTransactionActivity extends Activity implements
 		angleVal = (int)(azimuth_angle - firstAngleVal);
 		//Log.d(Tools.AWESOME_TAG, "tmpAngle: " + angleVal);
 		if(Math.abs(angleVal)>50){
-			firstAngleVal = (int) azimuth_angle;
+			firstAngleVal = (int)(azimuth_angle - Tools.sliceSize);
 			angleVal = (int)(azimuth_angle - firstAngleVal);
 		}
 		new GetNumbers().execute(angleVal + "");
-		//Log.d(Tools.AWESOME_TAG, "A: " + tmpAngle + ", FV: " + firstAngleVal+ ", A: " + azimuth_angle);
-		//Tools.getNumbers(tmpAngle);
-		// float pitch_angle = event.values[1];
-		// float roll_angle = event.values[2];
-		//Log.d(Tools.AWESOME_TAG, "Azimuth: " + azimuth_angle);
-		// Log.d(Tools.AWESOME_TAG, "azimuth, pitch, roll, lat, lon:\n" + azimuth_angle +
-		// "\n"+ pitch_angle + "\n" + roll_angle);
 	}
 
 	private class GetNumbers extends AsyncTask<String, Void, String> {

@@ -39,7 +39,7 @@
             android:layout_alignTop="@+id/middle"
             android:layout_alignBottom="@+id/middle"
             android:text="01234"
-            android:textSize="40sp" />
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/middle"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="6dp"
             android:textColor="#FFF"
             android:text="5"
-            android:textSize="75sp" />
+            android:textSize="90sp" />
 
         <TextView
             android:id="@+id/right"
@@ -62,7 +62,7 @@
             android:gravity="center|left"
             android:text="6789"
             android:textColor="#FFF"
-            android:textSize="40sp" />
+            android:textSize="50sp" />
 
     </RelativeLayout>
 

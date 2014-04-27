@@ -1,6 +1,5 @@
 package pl.tajchert.glassware.numpad;
 
-import android.util.Log;
 
 public class Tools {
 	
@@ -16,16 +15,15 @@ public class Tools {
 		result[0] = getLeft(middle);
 		result[1] = middle + "";
 		result[2] = getRight(middle);
-		Log.d(AWESOME_TAG, "degrees: " + degrees);
-		Log.d(AWESOME_TAG, result[0] + ", " + result[1] + ", " + result[2]);
+		//Log.d(AWESOME_TAG, "degrees: " + degrees);
+		//Log.d(AWESOME_TAG, result[0] + ", " + result[1] + ", " + result[2]);
 		return result;
 		
 	}
 	
 	private static String getLeft(int in){
 		String res = "";
-		int i = in - 1;
-		for(; i >= 0 ; i--){
+		for(int i = 0; i < in; i++){
 			res += i +"";
 		}
 		return res;
