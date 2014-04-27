@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top" >
+
+        <TextView
+            android:id="@+id/inputed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="X"
+            android:textColor="#FFF"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:gravity="center|right"
+            android:layout_alignTop="@+id/middle"
+            android:layout_alignBottom="@+id/middle"
+            android:text="01234"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/left"
+            android:layout_marginBottom="6dp"
+            android:textColor="#FFF"
+            android:text="5"
+            android:textSize="75sp" />
+
+        <TextView
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/middle"
+            android:layout_alignTop="@+id/middle"
+            android:layout_toRightOf="@+id/middle"
+            android:gravity="center|left"
+            android:text="6789"
+            android:textColor="#FFF"
+            android:textSize="40sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
