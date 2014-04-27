@@ -16,35 +16,44 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-public class AddTransactionActivity extends Activity implements
+public class SelectNumbersActivity extends Activity implements
 		SensorEventListener {
 
 	private TextView mLeft;
 	private TextView mMiddle;
 	private TextView mRight;
+	private TextView mTop;
 	private SensorManager mSensorManager;
 	private Sensor mOrientation;
 	
 	private boolean firstRun = true;
 	private int firstAngleVal;
 	private int angleVal = 0;
+	private String currentMiddle;
 
 	Float azimuth_angle;
 	Float pitch_angle;
 	Float roll_angle;
 
-	private SharedPreferences prefs;
-
 	@Override
 	public boolean onKeyDown(int keycode, KeyEvent event) {
 		if (keycode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			Log.i(Tools.AWESOME_TAG, "KEYCODE_DPAD_CENTER");
-			mSensorManager.unregisterListener(this);
-			this.finish();
-			
+			if(Tools.saved.length() < Tools.inputLength){
+				Tools.saved += currentMiddle;
+				mTop.setText(Tools.saved);
+			}
+			if(Tools.saved.length() == Tools.inputLength){
+				end();
+			}
 			return true;
 		}
 		return false;
+	}
+	
+	private void end(){
+		mSensorManager.unregisterListener(this);
+		this.finish();
 	}
 
 	@Override
@@ -54,11 +63,11 @@ public class AddTransactionActivity extends Activity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.select_number);
-
-		prefs = this.getSharedPreferences("com.tajchert.glassware.eyewallet",Context.MODE_PRIVATE);
+		
 		mLeft = (TextView) findViewById(R.id.left);
 		mMiddle = (TextView) findViewById(R.id.middle);
-		mRight= (TextView) findViewById(R.id.right);
+		mRight = (TextView) findViewById(R.id.right);
+		mTop = (TextView) findViewById(R.id.inputed);
 		
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -114,6 +123,7 @@ public class AddTransactionActivity extends Activity implements
 			mLeft.setText(numbers[0] + "");
 			mMiddle.setText(numbers[1] + "");
 			mRight.setText(numbers[2] + "");
+			currentMiddle = numbers[1];
 		}
 
 		@Override

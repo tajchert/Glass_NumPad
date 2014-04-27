@@ -5,6 +5,10 @@ public class Tools {
 	
 	public static final String AWESOME_TAG = "NumPad";
 	public static final int sliceSize = 5;
+	public static String saved = "";
+	public static final int inputLength = 3;
+	
+	
 	
 	public static String[] getNumbers(int degrees){
 		String [] result = {"", "", ""};

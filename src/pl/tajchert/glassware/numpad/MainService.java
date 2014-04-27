@@ -4,7 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-public class AddService extends Service {
+public class MainService extends Service {
 
 	@Override
 	public void onCreate() {
@@ -16,7 +16,7 @@ public class AddService extends Service {
 		return null;
 	}
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Intent i = new Intent(this, AddTransactionActivity.class);
+		Intent i = new Intent(this, SelectNumbersActivity.class);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(i);
 		return START_STICKY;
