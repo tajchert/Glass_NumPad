@@ -41,7 +41,7 @@ public class AddTransactionActivity extends Activity implements
 			Log.i(Tools.AWESOME_TAG, "KEYCODE_DPAD_CENTER");
 			mSensorManager.unregisterListener(this);
 			this.finish();
-			//new GetNumber().execute(angleVal + "");
+			
 			return true;
 		}
 		return false;
@@ -82,21 +82,20 @@ public class AddTransactionActivity extends Activity implements
 		super.onPause();
 		mSensorManager.unregisterListener(this);
 	}
-	private int tmpAngle;
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		float azimuth_angle = event.values[0];
 		if(firstRun){
-			Log.e(Tools.AWESOME_TAG, "GOT FIRST RUN");
 			firstAngleVal = (int) azimuth_angle;
 			firstRun = false;
 		}
-		tmpAngle = (int)(azimuth_angle - firstAngleVal);
-		Log.d(Tools.AWESOME_TAG, "firstAngleVal: " + firstAngleVal);
-		if(Math.abs(tmpAngle)>50){
-			Log.e(Tools.AWESOME_TAG, "CHANGE: " + tmpAngle);
+		angleVal = (int)(azimuth_angle - firstAngleVal);
+		//Log.d(Tools.AWESOME_TAG, "tmpAngle: " + angleVal);
+		if(Math.abs(angleVal)>50){
 			firstAngleVal = (int) azimuth_angle;
+			angleVal = (int)(azimuth_angle - firstAngleVal);
 		}
+		new GetNumbers().execute(angleVal + "");
 		//Log.d(Tools.AWESOME_TAG, "A: " + tmpAngle + ", FV: " + firstAngleVal+ ", A: " + azimuth_angle);
 		//Tools.getNumbers(tmpAngle);
 		// float pitch_angle = event.values[1];
@@ -106,19 +105,22 @@ public class AddTransactionActivity extends Activity implements
 		// "\n"+ pitch_angle + "\n" + roll_angle);
 	}
 
-	private class GetNumber extends AsyncTask<String, Void, String> {
+	private class GetNumbers extends AsyncTask<String, Void, String> {
 		private int ang;
+		private String [] numbers;
 
 		@Override
 		protected String doInBackground(String... params) {
 			ang = Integer.parseInt(params[0]);
-			
+			numbers = Tools.getNumbers(ang);
 			return "Executed";
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			
+			mLeft.setText(numbers[0] + "");
+			mMiddle.setText(numbers[1] + "");
+			mRight.setText(numbers[2] + "");
 		}
 
 		@Override

@@ -10,6 +10,9 @@ public class Tools {
 	public static String[] getNumbers(int degrees){
 		String [] result = {"", "", ""};
 		int middle = degrees/sliceSize;
+		if(middle<0){
+			middle = 0;
+		}
 		result[0] = getLeft(middle);
 		result[1] = middle + "";
 		result[2] = getRight(middle);
