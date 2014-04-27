@@ -1,12 +1,14 @@
 package pl.tajchert.glassware.numpad;
 
+import com.google.android.glass.media.Sounds;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +25,10 @@ public class SelectNumbersActivity extends Activity implements
 	private TextView mMiddle;
 	private TextView mRight;
 	private TextView mTop;
+	
 	private SensorManager mSensorManager;
 	private Sensor mOrientation;
+	private AudioManager audio;
 	
 	private boolean firstRun = true;
 	private int firstAngleVal;
@@ -38,13 +42,17 @@ public class SelectNumbersActivity extends Activity implements
 	@Override
 	public boolean onKeyDown(int keycode, KeyEvent event) {
 		if (keycode == KeyEvent.KEYCODE_DPAD_CENTER) {
+			
 			Log.i(Tools.AWESOME_TAG, "KEYCODE_DPAD_CENTER");
 			if(Tools.saved.length() < Tools.inputLength){
 				Tools.saved += currentMiddle;
 				mTop.setText(Tools.saved);
 			}
 			if(Tools.saved.length() == Tools.inputLength){
+				audio.playSoundEffect(Sounds.SUCCESS);
 				end();
+			}else{
+				audio.playSoundEffect(Sounds.TAP);
 			}
 			return true;
 		}
@@ -52,6 +60,7 @@ public class SelectNumbersActivity extends Activity implements
 	}
 	
 	private void end(){
+		
 		mSensorManager.unregisterListener(this);
 		this.finish();
 	}
@@ -70,6 +79,7 @@ public class SelectNumbersActivity extends Activity implements
 		mTop = (TextView) findViewById(R.id.inputed);
 		
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 		mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 	}
